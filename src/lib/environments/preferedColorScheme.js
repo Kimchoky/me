@@ -1,3 +1,4 @@
+
 /** @type { () => 'dark'|'light'|null }  */
 function getFromLocalStorage() {
     const theme = localStorage.getItem('theme');
@@ -17,20 +18,16 @@ function setToLocalStorage(theme) {
 function getOriginScheme() {
     const prefersColorScheme = window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
     const theme = prefersColorScheme ? 'dark' : 'light';
-    console.log("browser scheme : " + theme);
     return theme;
 }
 
 
-function init() {
-    toggle(getFromLocalStorage() ?? getOriginScheme());
-}
-
-
-/** @param theme {'dark'| 'light'} */
+/** @param theme {'dark'| 'light'|null} */
 function toggle(theme) {
+
+    if (theme === null)
+       theme = getTheme();
     
-    console.log('toggle to ', theme); 
     setToLocalStorage(theme);
 
     if (theme === 'dark')
@@ -40,4 +37,8 @@ function toggle(theme) {
     
 }
 
-export default { init, toggle }
+function getTheme() {
+    return getFromLocalStorage() ?? getOriginScheme();
+}
+
+export default { toggle, getTheme }
