@@ -1,7 +1,11 @@
-# Home
+# What is this?
 
-A personal homepage of my own.
+A personal page of my own.
 
-## Stacks
+# Stacks
  - Sveltekit
- - Vercel
+ - SkeletonUI with Tailwind CSS
+
+# Deployment to...
+ - GitHub Pages
+ - Vercel (maybe later)
