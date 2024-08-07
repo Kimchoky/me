@@ -9,7 +9,9 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
 	},
 	"devDependencies": {
 		"@skeletonlabs/skeleton": "^2.10.2",
@@ -42,5 +44,6 @@
 		"@fortawesome/free-solid-svg-icons": "^6.6.0",
 		"@fortawesome/svelte-fontawesome": "^0.2.2",
 		"@picocss/pico": "^2.0.6"
-	}
+	},
+	"homepage": "https://kimchoky.github.io"
 }
