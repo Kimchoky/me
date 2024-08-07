@@ -52,7 +52,7 @@
         </div>
         <div>
             <!-- Theme selector -->
-            <ToggleSwitch bind:checked={isDarkTheme} on:change={changeTheme} >
+            <ToggleSwitch bind:checked={isDarkTheme} on:change={changeTheme} height="1.5rem" size="2rem">
                 <svelte:fragment slot="inactive">
                     <FontAwesomeIcon icon={faSun} class="text-orange-300 dark:text-white"/>                        
                 </svelte:fragment>

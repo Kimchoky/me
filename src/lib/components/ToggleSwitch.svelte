@@ -7,11 +7,13 @@
     export let width = '4rem';
     export let height = '1rem';
     export let checked = false;  // default: Light mode
+    export let size = '1.2rem'; // size of (in)active handle
 
     $: cssStyles = {
         width,
         height,
         checked,
+        size,
     }
 
     // dynamically write cssVar
@@ -23,13 +25,12 @@
 
 
 <div class="inline-block" style={cssVarStyles}>
-    <label class="_label h-8 border-purple-300 border rounded-full relative"
-        style="width: {width};"
+    <label class="border-purple-300 border rounded-full relative"
         for={inputId}>
         <input class="hidden"
             id={inputId} type="checkbox" aria-checked="{checked}" bind:checked on:change >
-        <div class="id--handle absolute {checked?'checked':''}">
-            <div class="_absolute">
+        <div class="_handle absolute rounded-full bg-white w-8 h-8 flex items-center {checked?'_checked':''}">
+            <div class="absolute">
                 <slot name="inactive" />
             </div>
             <div class="absolute hidden">
@@ -40,11 +41,19 @@
 </div>
 
 <style>
-    div.id--handle {
+    label {
+        width: var(--width);
+        height: var(--height);
+    }
+
+    div._handle {
+        width: var(--size);
+        height: var(--size);
         transform:  translateX(0);
         transition: all 1s;
     }
-    div.id--handle.checked {
-        transform: translateX(var(--width));
+
+    div._handle._checked {
+        transform: translate(calc(var(--width) - (var(--size) * 2)), var(--height));
     }
 </style>
