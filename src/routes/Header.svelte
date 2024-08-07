@@ -1,5 +1,5 @@
 <script>
-    import { gLoading } from '$lib/stores/environments';
+    import { gLoading, staticRoot } from '$lib/stores/environments';
     import { onMount } from "svelte";
     import themeEnv from '$lib/environments/preferedColorScheme';
 
@@ -36,7 +36,7 @@
 </script>
 <AppBar>
     <svelte:fragment slot="lead">
-        <img src="/images/js.svg" alt="javascript" class="w-7 h-7   ">
+        <img src="{staticRoot}/images/js.svg" alt="javascript" class="w-7 h-7   ">
         <span class="p-2 noto-sans-kr">Jungsoo Kim</span>
     </svelte:fragment>
     <svelte:fragment slot="headline"></svelte:fragment>
