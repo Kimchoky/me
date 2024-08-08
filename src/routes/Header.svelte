@@ -36,7 +36,7 @@
 </script>
 
 
-<AppBar>
+<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
     <svelte:fragment slot="lead">
         <div class="flex">
             <img src="{base}/images/js.svg" alt="javascript" class="w-7 h-7 shadow-[0_0_5px_rgba(0,0,0,.4)] dark:shadow-none">

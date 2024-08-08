@@ -10,6 +10,7 @@
 	import NavBar from "./NavBar.svelte";
     import menuList from '$lib/json/menuList.json';
 	import { base } from "$app/paths";
+	import { slide } from "svelte/transition";
 
     export let data;
     
@@ -28,9 +29,9 @@
         <Header menuList={basedMenuList}/>
     </header>
     <!-- Grid Columns -->
-    <div class="grid grid-cols-1 md:grid-cols-[auto_1fr]">
+    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
         <!-- Left Sidebar. -->
-        <aside class="bg-yellow-500 p-4 hidden lg:block">
+        <aside class="bg-yellow-500 p-4 hidden lg:block transitionIn={true} transitionInParams={{ duration: 200 }}">
             <NavBar menuList={basedMenuList} direction="col"/>
         </aside>
         <!-- Main Content -->
