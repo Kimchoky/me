@@ -1,0 +1,27 @@
+[
+    {
+        "href": "/",
+        "name": "Home",
+        "icon": "mdi:home"
+    },
+    {
+        "href": "/about",
+        "name": "About",
+        "icon": "mdi:about"
+    },
+    {
+        "href": "/projects",
+        "name": "Projects",
+        "icon": "octicon:project-roadmap-24"
+    },
+    {
+        "href": "/skills",
+        "name": "Skills",
+        "icon": "mdi:code"
+    },
+    {
+        "href": "/portfolio",
+        "name": "Portfolio",
+        "icon": "mdi:presentation-play"
+    }
+]

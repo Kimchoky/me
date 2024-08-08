@@ -1,3 +1,4 @@
+import { isDarkMode } from "$lib/stores/environments";
 
 /** @type { () => 'dark'|'light'|null }  */
 function getFromLocalStorage() {
@@ -29,11 +30,15 @@ function toggle(theme) {
        theme = getTheme();
     
     setToLocalStorage(theme);
-
-    if (theme === 'dark')
+    
+    if (theme === 'dark') {
+        isDarkMode.set(true);
         document.documentElement.classList.add('dark');
-    else 
+    }
+    else  {
+        isDarkMode.set(false);
         document.documentElement.classList.remove('dark');
+    }
     
 }
 
@@ -41,4 +46,5 @@ function getTheme() {
     return getFromLocalStorage() ?? getOriginScheme();
 }
 
-export default { toggle, getTheme }
+
+export default { toggle, getTheme, isDarkMode }

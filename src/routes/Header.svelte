@@ -3,12 +3,11 @@
     import { onMount } from "svelte";
     import themeEnv from '$lib/client/preferedColorScheme';
 
-    import { FontAwesomeIcon } from '@fortawesome/svelte-fontawesome';
-    import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 	import NavBar from './NavBar.svelte';
 	import { AppBar } from '@skeletonlabs/skeleton';
 	import ToggleSwitch from '$lib/components/ToggleSwitch.svelte';
 	import { base } from '$app/paths';
+	import SiteLogo from '$lib/components/SiteLogo.svelte';
 
 
     export let menuList;
@@ -19,7 +18,6 @@
     $gLoading = true;
     
     onMount(() => {
-        console.log('Header OnMount')
         theme = themeEnv.getTheme();
     });
 
@@ -32,17 +30,18 @@
     }
 
     function changeTheme() {
-        console.log(isDarkTheme)
         theme = isDarkTheme ? 'dark' : 'light';
     }
-
+    
 </script>
 
 
 <AppBar>
     <svelte:fragment slot="lead">
-        <img src="{base}/images/js.svg" alt="javascript" class="w-7 h-7   ">
-        <span class="p-2 noto-sans-kr">Jungsoo Kim</span>
+        <div class="flex">
+            <img src="{base}/images/js.svg" alt="javascript" class="w-7 h-7 shadow-[0_0_5px_rgba(0,0,0,.4)] dark:shadow-none">
+            <SiteLogo cssClass="pl-2 pt-2" stroke="#222" fill="#222" />
+        </div>
     </svelte:fragment>
     <svelte:fragment slot="headline"></svelte:fragment>
     <svelte:fragment slot="trail">
@@ -52,12 +51,12 @@
         </div>
         <div>
             <!-- Theme selector -->
-            <ToggleSwitch bind:checked={isDarkTheme} on:change={changeTheme} height="1.5rem" size="2rem">
+            <ToggleSwitch bind:checked={isDarkTheme} on:change={changeTheme} width={4} height={2} size={2}>
                 <svelte:fragment slot="inactive">
-                    <FontAwesomeIcon icon={faSun} class="text-orange-300 dark:text-white"/>                        
+                    <iconify-icon icon="meteocons:clear-day-fill" width="2rem" />
                 </svelte:fragment>
                 <svelte:fragment slot="active">
-                    <FontAwesomeIcon icon={faMoon} class="text-black dark:text-yellow-400" />
+                    <iconify-icon icon="meteocons:starry-night-fill" width="2rem" />
                 </svelte:fragment>
             </ToggleSwitch>
         </div>
