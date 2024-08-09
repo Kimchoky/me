@@ -23,28 +23,35 @@
 
 <Loader show={$gLoading}/>
 
+<!-- media indicator -->
+<div class="absolute right-0 top-0 z-[999] bg-green-300 text-black p-1">
+    <span class="sm:hidden sm">smallest</span>
+    <span class="hidden sm:block md:hidden">sm</span>
+    <span class="hidden md:block lg:hidden">md</span>
+    <span class="hidden lg:block xl:hidden">lg</span>
+    <span class="hidden xl:block 2xl:hidden">xl</span>
+    <span class="hidden 2xl:block">2xl</span>
+</div>
+
 <div class="grid h-screen grid-rows-[auto_1fr_auto]">
     <!-- Header -->
-    <header class="sticky top-0 z-10 bg-red-500/80 backdrop-blur-sm p-4">
+    <header class="sticky top-0 z-10 backdrop-blur-sm p-4">
         <Header menuList={basedMenuList}/>
     </header>
     <!-- Grid Columns -->
-    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
+    <div class="grid grid-cols-1 lg:grid-cols-[auto]">
         <!-- Left Sidebar. -->
+        <!-- 
         <aside class="bg-yellow-500 p-4 hidden lg:block transitionIn={true} transitionInParams={{ duration: 200 }}">
             <NavBar menuList={basedMenuList} direction="col"/>
         </aside>
+        -->
         <!-- Main Content -->
-        <main class="space-y-4 bg-green-500 p-4">
+        <main class="space-y-4 py-4 
+                     px-4 lg:px-20">
             
             <slot />
             
-            <div>
-                {#each Array(10).fill(0) as item}
-                    <div class="h-40">dummy block</div>
-                {/each}
-            </div>
-
         </main>
     </div>
     <!-- Footer -->

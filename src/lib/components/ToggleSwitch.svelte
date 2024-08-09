@@ -41,7 +41,7 @@
         <input class="hidden"
             id={inputId} type="checkbox" aria-checked="{checked}" bind:checked on:change >
         <!-- Switch Handle -->
-        <div class="_handle absolute rounded-full flex justify-center items-center 
+        <div class="_handle absolute rounded-full flex justify-center items-center cursor-pointer
                     bg-slate-100 shadow-[0_0_5px_rgba(0,0,0,.4)]
                     dark:bg-slate-700 dark:shadow-[0_0_5px_rgba(255,255,255,.7)]
                     {checked?'_checked':''}">
