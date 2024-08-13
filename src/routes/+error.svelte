@@ -1,7 +1,5 @@
 <script>
-	import SnakeGame from "$lib/components/SnakeGame.svelte";
-
-    let showSnake = false;
+    
 </script>
 
 
@@ -16,13 +14,4 @@
             404: Page not found.</h3>
     </div>
 
-    <div>
-        <span>Play snake game!</span>
-        <button >Play</button>
-    </div>
-    
-    {#if showSnake}
-    <SnakeGame />
-    {/if
-    }
 </div>

@@ -1,4 +1,5 @@
 import { isDarkMode } from "$lib/stores/environments";
+import { getCookie, setCookie } from "$lib/client/cookie";
 
 /** @type { () => 'dark'|'light'|null }  */
 function getFromLocalStorage() {
@@ -9,11 +10,11 @@ function getFromLocalStorage() {
         default: return null;
     }
 }
-
 /** @param theme {'dark'|'light'} */
 function setToLocalStorage(theme) {
     localStorage.setItem('theme',  theme);
 }
+
 
 /** @type { ()=> 'dark'|'light' } */
 function getOriginScheme() {
@@ -23,13 +24,14 @@ function getOriginScheme() {
 }
 
 
-/** @param theme {'dark'| 'light'|null} */
+/** @param theme { string | null | undefined } */
 function toggle(theme) {
 
-    if (theme === null)
+    if (theme === null || (theme !== 'dark' && theme !== 'light'))
        theme = getTheme();
     
-    setToLocalStorage(theme);
+    setCookie('theme', theme);
+
     
     if (theme === 'dark') {
         isDarkMode.set(true);
@@ -42,8 +44,14 @@ function toggle(theme) {
     
 }
 
+/** @type { () => 'dark'|'light' } */
 function getTheme() {
-    return getFromLocalStorage() ?? getOriginScheme();
+    // return getFromLocalStorage() ?? getOriginScheme();
+    let theme = getCookie('theme');
+    if (theme === 'dark' || theme === 'light')
+        return theme;
+    else 
+        return getOriginScheme();
 }
 
 

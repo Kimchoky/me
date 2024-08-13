@@ -1,3 +1,4 @@
+/** @type { {[key: string]: string} } */
 const translated = {
     //'/test': '/api/test',
 }
