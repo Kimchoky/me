@@ -34,10 +34,10 @@
     <span class="hidden 2xl:block">2xl</span>
 </div>
 
-<div class="h-screen flex flex-col justify-between min-w-[480px]">
+<div class="h-screen flex flex-col justify-between">
 
     <!-- background gradient -->
-    <div class="fixed w-svw h-svh -z-50">
+    <div class="fixed w-full h-full -z-50">
         {#if $isDarkMode}
         <div class="absolute w-full h-full bg-gradient-to-bl dark:from-gray-600 dark:to-sky-950" transition:fade={{delay: 100, duration: 200}}></div>
         {:else}
