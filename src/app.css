@@ -16,7 +16,7 @@ body {
     font-weight: 500;
     font-style: normal;
 
-    @apply transition-colors duration-500;
+    @apply transition-all duration-500;
     @apply bg-gray-50 dark:bg-gray-700;
     @apply text-gray-700 dark:text-gray-50;
 
@@ -31,12 +31,8 @@ body {
 }
 
 @layer components {
-    .gradient-heading {
+    .gradient-text {
         @apply bg-clip-text text-transparent box-decoration-clone;
-        /* Direction */
-        @apply bg-gradient-to-br;
-        /* Color Stops */
-        @apply from-red-500 via-violet-500 to-blue-500;
     }
 }
 

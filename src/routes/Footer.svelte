@@ -4,6 +4,6 @@
     <div>
     </div>
 </div>
-<div class="flex justify-center text-sm">
+<div class="flex justify-end text-sm font-thin">
     <p>Copyright 2024 kimchoky. All rights reserved.</p>
 </div>

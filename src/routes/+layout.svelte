@@ -18,7 +18,7 @@
     /** @type { Array<import('$lib/types/app.d.ts').MenuItem> } */
     const basedMenuList = menuList.map(v => Object.assign(v, { href: `${base}${v.href}` }));
 
-    let isDarkMode = false;
+    $: isDarkMode = themeEnv.isDarkMode;
 </script>
 
 
@@ -34,19 +34,19 @@
     <span class="hidden 2xl:block">2xl</span>
 </div>
 
-<div class="grid h-screen grid-rows-[4rem_auto]">
+<div class="h-screen flex flex-col justify-between min-w-[480px]">
 
     <!-- background gradient -->
-    <div class="absolute w-svw h-svh -z-50">
-        {#if isDarkMode}
-        <div class="absolute w-full h-full bg-gradient-to-bl from-red-200 to-blue-300 block" transition:fade={{delay: 100, duration: 200}} />
+    <div class="fixed w-svw h-svh -z-50">
+        {#if $isDarkMode}
+        <div class="absolute w-full h-full bg-gradient-to-bl dark:from-gray-600 dark:to-sky-950" transition:fade={{delay: 100, duration: 200}}></div>
         {:else}
-        <div class="absolute w-full h-full bg-gradient-to-bl dark:from-gray-600 to-indigo-800" transition:fade={{delay: 100, duration: 200}} />
+        <div class="absolute w-full h-full bg-gradient-to-bl from-red-200 to-blue-300" transition:fade={{delay: 100, duration: 200}} ></div>
         {/if}
     </div>
             
     <!-- Header -->
-    <header class="top-0 z-10 backdrop-blur-sm p-4 w-full">
+    <header class="top-0 z-10 backdrop-blur-sm p-4 w-full h-4rem">
         <Header menuList={basedMenuList} siteTheme={data.theme} />
     </header>
     <!-- Grid Columns -->   
@@ -67,8 +67,7 @@
         </main>
     </div>
     <!-- Footer -->
-    <footer class="p-4 bg-gradient-to-b from-transparent
-                to-slate-300 dark:to-slate-500">
+    <footer class="p-4 ">
         <hr class="p-2 border-gray-400 border-t"/>
         <Footer />
     </footer>

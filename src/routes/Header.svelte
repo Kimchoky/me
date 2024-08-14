@@ -63,15 +63,20 @@
             </svelte:fragment>
         </ToggleSwitch>
 
+        <!-- mobile -->
         <div class="flex flex-col items-end relative pl-4 pr-2">
-            <button class="leading-none" on:click|stopPropagation={()=>showMenu=!showMenu}>
-                <div class="relative w-8 h-8">
-                {#if showMenu}
-                <iconify-icon class="" icon="mdi:keyboard-arrow-down" width="100%" in:fade={{duration: 300}} />
-                {:else}
-                <iconify-icon class="" icon="mdi:hamburger-menu" width="100%" in:fade={{duration: 300}} />
-                {/if}
-                </div>
+            <button on:click|stopPropagation={()=>showMenu=!showMenu}
+                class="flex items-center rounded-md 
+                    bg-pink-200 dark:bg-gray-700
+                    focus:bg-pink-300 focus:dark:bg-gray-500">
+                    <div class="w-8 h-8">
+                        {#if showMenu}
+                        <iconify-icon class="" icon="mdi:keyboard-arrow-down" width="100%" />
+                        {:else}
+                        <iconify-icon class="" icon="mdi:hamburger-menu" width="100%" />
+                        {/if}
+                    </div>
+                    <span class="hidden lg:inline-block pl-1">MENU</span>
             </button>
             <!-- Nav -->
             {#if showMenu}
