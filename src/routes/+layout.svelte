@@ -18,8 +18,6 @@
     /** @type { Array<import('$lib/types/app.d.ts').MenuItem> } */
     const basedMenuList = menuList.map(v => Object.assign(v, { href: `${base}${v.href}` }));
 
-    // themeEnv.toggle(data.theme);
-    // $: isDarkMode = themeEnv.getTheme() === 'dark';
     let isDarkMode = false;
 </script>
 
@@ -49,9 +47,10 @@
             
     <!-- Header -->
     <header class="top-0 z-10 backdrop-blur-sm p-4 w-full">
-        <Header menuList={basedMenuList}/>
+        <Header menuList={basedMenuList} siteTheme={data.theme} />
     </header>
     <!-- Grid Columns -->   
+    <!-- <div class="grid grid-cols-1 lg:grid-cols-[auto]"> -->
     <div class="grid grid-cols-1 lg:grid-cols-[auto]">
         <!-- Left Sidebar. -->
         <!-- 

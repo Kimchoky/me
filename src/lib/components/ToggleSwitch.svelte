@@ -1,8 +1,6 @@
 <script>
 	import { randomHexString } from "$lib/client/stringUtil";
-	import { slide } from "svelte/transition";
     import { fade } from 'svelte/transition';
-	import Button from "./button.svelte";
 
     const inputId = randomHexString(6);
     const UNIT = 'rem';
@@ -14,8 +12,8 @@
     /** size(rem) of switch handle */
     export let size = 1.2; // size of (in)active handle
     export let checked = false;  // default: Light mode
-    
-    $: handleTop = Math.abs(height - size) / -2;
+
+    $: handleTop = Math.abs(height - size) / 2 * (height < size ? -1 : 1);
     $: handleRight = width - size;
     $: cssStyles = {
         width,
@@ -32,7 +30,6 @@
         .join(';');
 
 </script>
-
 
 <div class="inline-block" style={cssVarStyles}>
     <label class="rounded-full relative bg-slate-400"

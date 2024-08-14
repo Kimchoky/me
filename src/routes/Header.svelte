@@ -7,26 +7,29 @@
 	import ToggleSwitch from '$lib/components/ToggleSwitch.svelte';
 	import { base } from '$app/paths';
 	import SiteLogo from '$lib/components/SiteLogo.svelte';
-	import { slide } from 'svelte/transition';
+	import { fade, slide, crossfade } from 'svelte/transition';
+	import { randomHexString } from '$lib/client/stringUtil';
+	import { browser } from '$app/environment';
 
-    
+    const id_hamburger = randomHexString();
 
     export let menuList;
+    export let siteTheme;
 
     /** @type {'dark'|'light'|null}*/
-    let theme = null;
+    let theme = siteTheme;
     let isDarkTheme = false;
     $gLoading = true;
     
-    onMount(() => {
-        theme = themeEnv.getTheme();
-    });
-
     $: {
         if (theme) { 
             themeEnv.toggle(theme);
             isDarkTheme = theme === 'dark';
             $gLoading = false;
+        }
+
+        if (browser && showMenu) {
+            document.body.addEventListener('click', handleHamburgerClose);
         }
     }
 
@@ -36,9 +39,9 @@
     
     let showMenu = false;
 
-    function menuClickHandler() {
-        console.log(11);
-        showMenu = !showMenu;
+    function handleHamburgerClose() {
+        showMenu = false;
+        document.body.removeEventListener('click', handleHamburgerClose);
     }
 </script>
 
@@ -48,31 +51,37 @@
         <SiteLogo cssClass="pl-2 pt-2" stroke="#222" fill="#222" />
     </div>
 
-    <div class="absolute right-0 flex justify-end">
+    <div class="absolute right-0 flex justify-end items-center">
 
-        <div class="flex flex-col items-end">
-            <div class="pr-2">
-                <button on:click={()=>showMenu=!showMenu}>
-                    <iconify-icon icon="mdi:hamburger-menu" width="2rem" />
-                </button>
-            </div>
+        <!-- Theme selector -->
+        <ToggleSwitch bind:checked={isDarkTheme} on:change={changeTheme} width={3} height={1.2} size={1.5}>
+            <svelte:fragment slot="inactive">
+                <iconify-icon icon="meteocons:clear-day-fill" width="1.5rem" />
+            </svelte:fragment>
+            <svelte:fragment slot="active">
+                <iconify-icon icon="meteocons:starry-night-fill" width="1.5rem" />
+            </svelte:fragment>
+        </ToggleSwitch>
+
+        <div class="flex flex-col items-end relative pl-4 pr-2">
+            <button class="leading-none" on:click|stopPropagation={()=>showMenu=!showMenu}>
+                <div class="relative w-8 h-8">
+                {#if showMenu}
+                <iconify-icon class="" icon="mdi:keyboard-arrow-down" width="100%" in:fade={{duration: 300}} />
+                {:else}
+                <iconify-icon class="" icon="mdi:hamburger-menu" width="100%" in:fade={{duration: 300}} />
+                {/if}
+                </div>
+            </button>
             <!-- Nav -->
             {#if showMenu}
-            <div transition:slide={{duration: 300}}>
+            <div id="{id_hamburger}" class="absolute top-10" transition:slide={{duration: 300}}>
                 <NavBar {menuList} direction="col" />
             </div>
             {/if}
         </div>
 
-        <!-- Theme selector -->
-        <ToggleSwitch bind:checked={isDarkTheme} on:change={changeTheme} width={4} height={2} size={2}>
-            <svelte:fragment slot="inactive">
-                <iconify-icon icon="meteocons:clear-day-fill" width="2rem" />
-            </svelte:fragment>
-            <svelte:fragment slot="active">
-                <iconify-icon icon="meteocons:starry-night-fill" width="2rem" />
-            </svelte:fragment>
-        </ToggleSwitch>
+ 
 
     </div>
     

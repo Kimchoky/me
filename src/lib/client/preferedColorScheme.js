@@ -1,5 +1,6 @@
 import { isDarkMode } from "$lib/stores/environments";
 import { getCookie, setCookie } from "$lib/client/cookie";
+import { browser } from "$app/environment";
 
 /** @type { () => 'dark'|'light'|null }  */
 function getFromLocalStorage() {
@@ -26,6 +27,7 @@ function getOriginScheme() {
 
 /** @param theme { string | null | undefined } */
 function toggle(theme) {
+    if (!browser) return;
 
     if (theme === null || (theme !== 'dark' && theme !== 'light'))
        theme = getTheme();
