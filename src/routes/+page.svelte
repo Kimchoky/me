@@ -126,8 +126,7 @@
 
     ._star { stroke: #9b9b9b; }
     ._star._fill { fill: #ebcb16; }
-    ._star._empty { fill: #9b9b9b; }
-
+    ._star._empty { fill: none; }
     [data-toolip]::before {
         position: absolute;
         top: -1.2rem;
@@ -136,6 +135,7 @@
         opacity: 0;
         background-color: lightyellow;
         font-size: .8rem;
+        color: #373737;
         padding: 0 .5em;
     }
     [data-toolip]:hover::before {
