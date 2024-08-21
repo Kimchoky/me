@@ -1,21 +1,31 @@
 <script>
 	import { base } from "$app/paths";
-    
+	import { iterate } from "$lib/utils";
+	import SvgLoader from "$lib/components/SvgLoader.svelte";
+    import { Popover, Button, Avatar } from 'flowbite-svelte';
+
     export let data;
 
     const { techs, projects } = data;
 
-    /** @param tech { {name:string, href:string, icon?:string|null, image?:string|null, svg?: string|null } } */
-    function handleMouseOver(tech) {
+    let preview = {
+        href: '',
+        timer: -1
+    };
 
-    }
-
-    /** @param {string} path */
-    async function getSvg(path) {
-        return fetch(`${base}${path}?raw`);
+    /** @param {number} level */
+    function getTechLevelText(level) {
+        switch(level) {
+            default: return 'No skills';
+            case 1: return 'Novice';
+            case 2: return 'Intermeidate';
+            case 3: return 'Expert';
+        }
     }
 
 </script>
+
+
 
 <section
     class="_titleText pb-10 text-[3rem] md:text-[5rem] lg:text-[7rem]
@@ -38,27 +48,35 @@
     <div class="text-center text-[1.5rem] md:text-[2rem] lg:text-[3rem]">Techs</div>
     <div class="text-right"><button type="button" class="btn btn-sm variant-filled">See more</button></div>
     <hr class="text-slate-600 my-4">
-    <div class="logo-cloud grid-cols-3 md:!grid-cols-4 lg:!grid-cols-5 gap-4">
+    <div class="grid gap-3 justify-around
+        grid-cols-[repeat(2,minmax(10rem,0.5fr))] gap-x-10 
+        sm:grid-cols-3 
+        md:!grid-cols-4 
+        lg:!grid-cols-5 lg:gap-x-5">
         {#each techs as tech}
         {#if tech.name}
-        <a href={tech.href} class="logo-item flex flex-col justify-center items-center">
-            <div class="_tech">
+        <div class="flex flex-col justify-center items-center content-center p-2
+            border bg-opacity-30 relative
+            border-slate-400 bg-slate-300 
+            dark:border-slate-600 dark:bg-slate-700 ">
+            <div class="_icon flex items-center justify-center p-4">
                 {#if tech.icon}
                 <iconify-icon icon={tech.icon} width="7vw"/>
                 {:else if tech.image}
                 <img src={base}{tech.image} alt={tech.name} />
                 {:else if tech.svg}
-                    {#await getSvg(tech.svg)}
-                        <div>Loading...</div>
-                    {:then res}    
-                        {#await res.text() then svg}
-                            {@html svg}    
-                        {/await}
-                    {/await}
+                <SvgLoader url={tech.svg} />
                 {/if}
             </div>
-            <div class="text-xs !m-0 pt-1">{tech.name}</div>
-        </a> 
+            <a class="-a-popover text-xs !m-0 cursor-pointer" href={tech.href}>{tech.name}</a>
+            <div class="absolute right-0 top-0 flex" data-toolip={getTechLevelText(tech.level)}>
+                {#each iterate(1, 3) as step }
+                <svg xmlns="http://www.w3.org/2000/svg" width=".8rem" height=".8rem" viewBox="0 0 16 16">
+                    <path class="_star {step <= tech.level ? '_fill' : '_empty'}" d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327l4.898.696c.441.062.612.636.282.95l-3.522 3.356l.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                </svg>
+                {/each}
+            </div>
+        </div> 
         {/if}   
         {/each}
     </div>
@@ -69,18 +87,18 @@
     <div class="text-right"><button type="button" class="btn btn-sm variant-filled">See more</button></div>
     <hr class="text-slate-600 my-4">
     <div class="logo-cloud grid-cols-2 md:!grid-cols-3 lg:!grid-cols-4 gap-4">
-        {#each techs as tech}
-        {#if !!tech.name}
-        <a href={tech.href} class="logo-item flex justify-center items-center">
-            <div class="_tech">
-                {#if tech.icon}
-                <iconify-icon icon={tech.icon} width="7svw"/>
-                {:else if tech.image}
-                <img src={base}{tech.image} alt={tech.name} />
+        {#each projects as project}
+        {#if !!project.name}
+        <div class="logo-item flex flex-col justify-center items-center">
+            <div class="_icon">
+                {#if project.icon}
+                <iconify-icon icon={project.icon} width="7svw"/>
+                {:else if project.image}
+                <img src={base}{project.image} alt={project.name} />
                 {/if}
-                <!-- <div class="pt-4">{tech.name}</div> -->
             </div>
-        </a>    
+            <div class="pt-4">{project.name}</div>
+        </div>    
         {/if}
         {/each}
     </div>
@@ -93,6 +111,12 @@
         line-height: 1em;
     }
 
+    ._icon {
+        display: flex;
+        width: calc(100% - 5rem);
+        height: 100%;
+    }
+
     a:hover {
         transform: scale(1.2);
         transform-origin: center;
@@ -100,6 +124,22 @@
         transition-duration: .3s;
     }
 
+    ._star { stroke: #9b9b9b; }
+    ._star._fill { fill: #ebcb16; }
+    ._star._empty { fill: #9b9b9b; }
 
+    [data-toolip]::before {
+        position: absolute;
+        top: -1.2rem;
+        right: 0;
+        content: attr(data-toolip);
+        opacity: 0;
+        background-color: lightyellow;
+        font-size: .8rem;
+        padding: 0 .5em;
+    }
+    [data-toolip]:hover::before {
+        opacity: 1;
+    }
     
 </style>

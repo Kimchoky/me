@@ -10,6 +10,7 @@
 </script>
 
 <div class={cssClass}>
+    
     <!-- kimchoky -->
     <svg width="112.727" height="21.818" viewBox="0 0 112.727 21.818" xmlns="http://www.w3.org/2000/svg">
         <g id="svgGroup" stroke-linecap="round" fill-rule="evenodd" font-size="9pt" stroke="#000"
@@ -19,4 +20,6 @@
                 vector-effect="non-scaling-stroke" />
         </g>
     </svg>
+
+    
 </div>

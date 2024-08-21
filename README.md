@@ -4,7 +4,7 @@ A personal page of my own.
 
 # Stacks
  - Sveltekit
- - SkeletonUI with Tailwind CSS
+ - UI from shadcn/ui
 
 # Deployment to...
  - GitHub Pages

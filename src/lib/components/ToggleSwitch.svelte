@@ -18,7 +18,6 @@
     $: cssStyles = {
         width,
         height,
-        checked,
         size,
         handleTop,
         handleRight,
@@ -31,7 +30,7 @@
 
 </script>
 
-<div class="inline-block" style={cssVarStyles}>
+<div class="contents" style={cssVarStyles}>
     <label class="rounded-full relative bg-slate-400"
         for={inputId}>
         <!-- invisible check element -->

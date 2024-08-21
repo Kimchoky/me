@@ -47,11 +47,11 @@
 
 <div class="grid grid-cols-[1fr_1fr]">
     <div class="flex">
-        <img src="{base}/images/js.svg" alt="javascript" class="w-7 h-7 shadow-[0_0_5px_rgba(0,0,0,.4)] dark:shadow-none">
+        <!-- <img src="{base}/images/js.svg" alt="javascript" class="w-7 h-7 shadow-[0_0_5px_rgba(0,0,0,.4)] dark:shadow-none"> -->
         <SiteLogo cssClass="pl-2 pt-2" stroke="#222" fill="#222" />
     </div>
 
-    <div class="absolute right-0 flex justify-end items-center">
+    <div class="flex justify-end items-center">
 
         <!-- Theme selector -->
         <ToggleSwitch bind:checked={isDarkTheme} on:change={changeTheme} width={3} height={1.2} size={1.5}>
@@ -85,8 +85,6 @@
             </div>
             {/if}
         </div>
-
- 
 
     </div>
     

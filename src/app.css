@@ -16,9 +16,13 @@ body {
     font-weight: 500;
     font-style: normal;
 
-    @apply transition-all duration-500;
-    @apply bg-gray-50 dark:bg-gray-700;
+    @apply transition-all duration-300;
     @apply text-gray-700 dark:text-gray-50;
+
+    --app-light-bgGradientFrom: #fecaca;
+    --app-light-bgGradientTo: #93c5fd ; 
+    --app-dark-bgGradientFrom: #4b5563;
+    --app-dark-bgGradientTo: #082f49;
 
 }
 

@@ -25,7 +25,7 @@
 <Loader show={$gLoading}/>
 
 <!-- media indicator -->
-<div class="absolute right-0 top-0 z-[999] bg-green-300 text-black p-1">
+<div class="fixed left-0 bottom-0 z-[999] bg-green-300 text-black p-1">
     <span class="sm:hidden sm">smallest</span>
     <span class="hidden sm:block md:hidden">sm</span>
     <span class="hidden md:block lg:hidden">md</span>
@@ -35,38 +35,26 @@
 </div>
 
 <div class="h-screen flex flex-col justify-between">
-
+    
     <!-- background gradient -->
     <div class="fixed w-full h-full -z-50">
         {#if $isDarkMode}
-        <div class="absolute w-full h-full bg-gradient-to-bl dark:from-gray-600 dark:to-sky-950" transition:fade={{delay: 100, duration: 200}}></div>
+        <div class="absolute w-full h-full bg-gradient-to-bl dark:from-[var(--app-dark-bgGradientFrom)] dark:to-[var(--app-dark-bgGradientTo)]" transition:fade={{delay: 100, duration: 200}}></div>
         {:else}
-        <div class="absolute w-full h-full bg-gradient-to-bl from-red-200 to-blue-300" transition:fade={{delay: 100, duration: 200}} ></div>
+        <div class="absolute w-full h-full bg-gradient-to-bl from-[var(--app-light-bgGradientFrom)] to-[var(--app-light-bgGradientTo)]" transition:fade={{delay: 100, duration: 200}} ></div>
         {/if}
     </div>
             
-    <!-- Header -->
     <header class="top-0 z-10 backdrop-blur-sm p-4 w-full h-4rem">
         <Header menuList={basedMenuList} siteTheme={data.theme} />
     </header>
-    <!-- Grid Columns -->   
-    <!-- <div class="grid grid-cols-1 lg:grid-cols-[auto]"> -->
-    <div class="grid grid-cols-1 lg:grid-cols-[auto]">
-        <!-- Left Sidebar. -->
-        <!-- 
-        <aside class="bg-yellow-500 p-4 hidden lg:block transitionIn={true} transitionInParams={{ duration: 200 }}">
-            <NavBar menuList={basedMenuList} direction="col"/>
-        </aside>
-        -->
-        <!-- Main Content -->
-        <main class="space-y-4 py-4 
-                    px-4 lg:px-20">
-            
+    
+    <main>
+        <div class="space-y-4 py-4 px-4 lg:px-20">
             <slot />
-            
-        </main>
-    </div>
-    <!-- Footer -->
+        </div>
+    </main>
+
     <footer class="p-4 ">
         <hr class="p-2 border-gray-400 border-t"/>
         <Footer />
