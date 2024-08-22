@@ -11,3 +11,16 @@ export interface MenuItem {
     name: string,
     icon?: string,
 }
+
+
+export interface GridTilesItem {
+    id: string,
+    parentId?: string,
+    name: string,
+    icon?: string,  /* iconify-icon id */   
+    image?: string, /* url of an image(png, jpg, gif, ...) */
+    svg?: string,   /*  */
+    href?: string,  /* url to link */
+    stars?: number, /* number of stars */
+    maxStars?: number, /* maximum number of stars */
+}

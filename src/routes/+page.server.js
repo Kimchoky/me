@@ -1,27 +1,35 @@
-    /** @type { Array<{name:string, level:1|2|3, href?:string, icon?:string|null, image?:string|null, svg?: string|null }> }*/
+    /** @type { Array<import('$lib/types/app').GridTilesItem> }*/
     const techs = [
-        { name: 'Java/JSP', level: 3, href: 'https://www.java.com', icon: 'logos:java' },
-        { name: 'Javascript', level: 3, href: 'https://developer.mozilla.org/ko/docs/Web/JavaScript', icon: 'logos:javascript' },
-        { name: 'Spring', level: 3, href: 'https://www.java.com', icon: 'devicon:spring' },
-        { name: 'SvelteKit', level: 2, href: 'https://kit.svelte.dev', icon: 'logos:svelte-icon' },
-        { name: 'Vite', level: 1, href: 'https://ko.vitejs.dev/', icon: 'logos:vitejs' },
-        { name: 'Node.js', level: 2, href: 'https://nodejs.org', icon: 'logos:nodejs-icon' },
-        { name: 'jQuery', level: 3, href: 'https://jquery.com/', icon: 'mdi:jquery' },
-        { name: 'Tailwind', level: 2, href: 'https://tailwindcss.com', icon: 'logos:tailwindcss-icon' },
-        { name: 'D3.js', level: 2, href: 'https://d3js.org/', icon: 'logos:d3' },
+        { id: 'Java/JSP', name: 'Java/JSP', stars: 3, href: 'https://www.java.com', icon: 'logos:java' },
+        { id: 'Javascript', name: 'Javascript', stars: 3, href: 'https://developer.mozilla.org/ko/docs/Web/JavaScript', icon: 'logos:javascript' },
+        { id: 'Spring', name: 'Spring', stars: 3, href: 'https://www.java.com', icon: 'devicon:spring' },
+        { id: 'SvelteKit', name: 'SvelteKit', stars: 2, href: 'https://kit.svelte.dev', icon: 'logos:svelte-icon' },
+        { id: 'Vite', name: 'Vite', stars: 1, href: 'https://ko.vitejs.dev/', icon: 'logos:vitejs' },
+        { id: 'Node.js', name: 'Node.js', stars: 2, href: 'https://nodejs.org', icon: 'logos:nodejs-icon' },
+        { id: 'jQuery', name: 'jQuery', stars: 3, href: 'https://jquery.com/', icon: 'mdi:jquery' },
+        { id: 'Tailwind', name: 'Tailwind', stars: 2, href: 'https://tailwindcss.com', icon: 'logos:tailwindcss-icon' },
+        { id: 'D3.js', name: 'D3.js', stars: 2, href: 'https://d3js.org/', icon: 'logos:d3' },
         // { name: 'Iconify', href: 'https://icon-sets.iconify.design', icon: 'line-md:iconify1' },
         // { name: 'NPM', href: 'https://www.npmjs.com/', icon: 'logos:npm-icon' },
     ]
 
-    /** @type { Array<{name:string, customer: string, href?:string, icon?:string|null, image?:string|null, svg?: string|null }> }*/
+    const customers = [
+        { name: '대법원', id: 'scourt', image: '/images/ci-scourt.png', },
+        { name: '예금보험공사', id: 'kdic', image: '/images/ci-kdic.png', },
+        { id: 'ebs', name: 'EBS', image: '/images/ci-ebs.png', },
+    ]
+
+    /** @type { Array<import('$lib/types/app').GridTilesItem> }*/
     const projects = [
-        { name: '후견등기정보시스템', customer: '대법원' },
-        { name: '전자후견등기시스템', customer: '대법원', href: 'https://egdrs.scourt.go.kr' }
+        { id:'gdrs', name: '후견등기정보시스템', parentId: 'scourt',  },
+        { id:'egdrs', name: '전자후견등기시스템', parentId: 'scourt', href: 'https://egdrs.scourt.go.kr',  },
+        { id:'tgm', name: 'The GreatMinds', parentId: 'ebs', href: 'https://www.thegreatminds.com/',  }
     ]
 
     export function load() {
         return {
             techs,
+            customers,
             projects,
         }
     }
