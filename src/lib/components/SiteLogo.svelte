@@ -1,4 +1,5 @@
 <script>
+	import { base } from "$app/paths";
 	import { isDarkMode } from "$lib/stores/environments";
 
     export let stroke = '#000';
@@ -9,7 +10,7 @@
 
 </script>
 
-<div class={cssClass}>
+<a href="{base}" class={cssClass}>
     
     <!-- kimchoky -->
     <svg width="112.727" height="21.818" viewBox="0 0 112.727 21.818" xmlns="http://www.w3.org/2000/svg">
@@ -22,4 +23,4 @@
     </svg>
 
     
-</div>
+</a>

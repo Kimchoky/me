@@ -49,10 +49,8 @@
         <Header menuList={basedMenuList} siteTheme={data.theme} />
     </header>
     
-    <main>
-        <div class="space-y-4 py-4 px-4 lg:px-20">
-            <slot />
-        </div>
+    <main class="grow space-y-4 py-4 px-4 lg:px-20">
+        <slot />
     </main>
 
     <footer class="p-4 ">

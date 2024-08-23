@@ -17,10 +17,19 @@ export interface GridTilesItem {
     id: string,
     parentId?: string,
     name: string,
+    year?: number,  /* participated in year */
     icon?: string,  /* iconify-icon id */   
     image?: string, /* url of an image(png, jpg, gif, ...) */
     svg?: string,   /*  */
     href?: string,  /* url to link */
     stars?: number, /* number of stars */
     maxStars?: number, /* maximum number of stars */
+}
+
+export interface PortfolioPageItem {
+    id: string, 
+    name: string,
+    component: string,
+    image?: string,
+    cssClass?: string,
 }

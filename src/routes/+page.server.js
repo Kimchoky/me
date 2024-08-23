@@ -21,9 +21,10 @@
 
     /** @type { Array<import('$lib/types/app').GridTilesItem> }*/
     const projects = [
-        { id:'gdrs', name: '후견등기정보시스템', parentId: 'scourt',  },
-        { id:'egdrs', name: '전자후견등기시스템', parentId: 'scourt', href: 'https://egdrs.scourt.go.kr',  },
-        { id:'tgm', name: 'The GreatMinds', parentId: 'ebs', href: 'https://www.thegreatminds.com/',  }
+        { id:'gdrs', name: '후견등기정보시스템', parentId: 'scourt', year: 2024 },
+        { id:'egdrs', name: '전자후견등기시스템', parentId: 'scourt', year:2024, href: 'https://egdrs.scourt.go.kr',  },
+        { id:'tgm', name: 'The GreatMinds', parentId: 'ebs', year: 2022, href: 'https://www.thegreatminds.com/',  },
+        { id:'kdic', name: '차세대 시스템 고도화', parentId: 'kdic', year: 2023, },
     ]
 
     export function load() {

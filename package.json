@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@egjs/svelte-grid": "^1.16.0",
 		"iconify-icon": "^2.1.0"
 	},
 	"homepage": "https://kimchoky.github.io"

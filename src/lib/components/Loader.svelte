@@ -22,6 +22,7 @@
     position: fixed;
     height: 100svh;
     width: 100svw;
+    z-index: 9999;
 }
 .spinner_hzlK { 
     animation: spinner_vc4H .8s linear infinite;

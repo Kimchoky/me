@@ -1,7 +1,7 @@
 <script>
 	import { base } from "$app/paths";
 	import SvgLoader from "$lib/components/SvgLoader.svelte";
-	import GridTiles from "$lib/components/GridTiles.svelte";
+	import GridTiles from "./GridTiles.svelte";
 
     export let data;
 
@@ -10,7 +10,12 @@
         const c = customers.find(v => v.id === p.parentId);
         if (c && !p.image)
             p.image = c.image;
-    })
+    });
+    projects.sort((a, b) => {
+        const key1 = (b.year ?? 0) - (a.year ?? 0);
+        const key2 = (a.name).localeCompare(b.name);
+        return key1 !== 0 ? key1 : key2;
+    });
 
 </script>
 

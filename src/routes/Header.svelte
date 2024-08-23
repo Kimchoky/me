@@ -8,7 +8,7 @@
 	import { base } from '$app/paths';
 	import SiteLogo from '$lib/components/SiteLogo.svelte';
 	import { fade, slide, crossfade } from 'svelte/transition';
-	import { randomHexString } from '$lib/client/stringUtil';
+	import { randomHexString } from '$lib/client/utils';
 	import { browser } from '$app/environment';
 
     const id_hamburger = randomHexString();

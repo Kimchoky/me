@@ -1,7 +1,7 @@
 <script>
 	import { base } from "$app/paths";
 	import { iterate } from "$lib/utils";
-	import SvgLoader from "./SvgLoader.svelte";
+	import SvgLoader from "../lib/components/SvgLoader.svelte";
 
     /** @type { Array<import('$lib/types/app').GridTilesItem> } */
     export let items;
@@ -39,6 +39,12 @@
         border-slate-400 bg-slate-300 
         dark:border-slate-600 dark:bg-slate-700">
         
+        {#if item.year}
+        <div class="h-4">
+            <div class="absolute right-0 mr-2 p-0.5 bg-blue-100 rounded-sm border border-slate-400 text-xs">{item.year}</div>
+        </div>
+        {/if}
+
         <div class="_icon flex flex-grow items-center justify-center p-4">
             {#if item.icon}
             <iconify-icon icon={item.icon} width="7vw"/>
@@ -49,7 +55,11 @@
             {/if}
         </div>
 
+        {#if item.href}
         <a class="!m-0 cursor-pointer" href={item.href}>{item.name}</a>
+        {:else}
+        <div class="!m-0">{item.name}</div>
+        {/if}
 
         {#if item.stars}
         <div class="absolute right-0 top-0 flex" data-toolip={getTechLevelText(item.stars)}>
@@ -60,6 +70,7 @@
             {/each}
         </div>
         {/if}
+
     </div> 
     {/if}   
     {/each}

@@ -1,5 +1,5 @@
 <script>
-	import { randomHexString } from "$lib/client/stringUtil";
+	import { randomHexString } from "$lib/client/utils";
     import { fade } from 'svelte/transition';
 
     const inputId = randomHexString(6);

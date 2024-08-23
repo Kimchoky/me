@@ -13,3 +13,14 @@ export function randomHexString(length = 8) {
         return crypto.randomBytes(length).toString('hex');
     }
 }
+
+export function randomInt(start = 1, end = 10) {
+    if (browser) {
+        const arr = new Uint32Array(1);
+        window.crypto.getRandomValues(arr);
+        return (arr[0] % (end + start)) + start;
+    }
+    else {
+        return 0;
+    }
+}
