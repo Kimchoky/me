@@ -29,7 +29,7 @@ export interface GridTilesItem {
 export interface PortfolioPageItem {
     id: string, 
     name: string,
-    component: string,
+    href: string,
     image?: string,
     cssClass?: string,
 }
