@@ -6,21 +6,12 @@
 
     export let data;
 
-    const config = {
-        height: 500, /*vh*/
-        animations: [
-            {
-                id: 'item-x',
-                animateType: 1,
-            },
-        ]
-    }
-
     /** @type { Array<SongData> }*/
-    const wholeList = data.billboardHot100.map(songData => 
-        Object.assign({
-            color: `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`
-        }, songData));
+    const wholeList = data.billboardHot100
+    .map(songData => Object.assign({
+        color: `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`
+    }, songData))
+    .sort((a, b) => b.this_week - a.this_week);
 
     /** @type { Array<{songData: SongData, dimensionData: DimensionData}> } */
     let visibleList = wholeList
@@ -30,8 +21,8 @@
         dimensionData: {
             width: 10,
             height: 10,
-            x: randomInt(0, 100),
-            y: randomInt(0, 100),
+            x: 1 * i,
+            y: 1 * i,
             widthUnit: '%',
             heightUnit: '%',
             xUnit: '%',
@@ -41,34 +32,28 @@
     
 
     let progress = 0;
+    let currentSong = wholeList[0];
     /** @type DOMRect */
     let stickyRect;
     let currPx = 0, topPx = 0, bottomPx = 0;
 
     function doAnimate() {
 
-        /* TEMPORARY ANIMATE */
-        visibleList = visibleList.map((d, index) => {
-            d.dimensionData.x = randomInt(0, 100);
-            d.dimensionData.y = randomInt(0, 100);
-            return d;
+        const index = Math.min(Math.floor(progress), wholeList.length - 1);
+        currentSong = wholeList[index];
+        
+        visibleList = wholeList.slice(index - 3, index + 3).map((songData, i) => {
+            return {
+                songData,
+                dimensionData: {
+                    x: i * 10,
+                    y: i * 10,
+                }
+            };
         });
         
-        config.animations.forEach(c => {
-            const el = document.getElementById(c.id);
-            if (!el) return;
-            
-            switch (c.animateType) {
-                case 1: animateType1(el, c);
-            }
-        })
     }
 
-    function animateType1(element, item) {
-        let x = progress + '%';
-        let y = progress / 2 + '%';
-        element.style.transform = `translate(${x}, ${y})`;
-    }
 
     /** @param {Event} e */
     function handleScroll(e) {
@@ -109,19 +94,10 @@
         {/each}
 
         <div class="text-left">
-            <h1 class="inline">Top {currPx} {progress}%</h1>
+            <h1 class="inline">progress: {progress}%</h1>
         </div>
         <div class="_slide-container text-center ">
-            <div>topPx: {topPx}, bottomPx: {bottomPx}</div>
-            <div id="item-0" class="_slide">
-                <h1>동해물과</h1>
-            </div>
-            <div id="item-1" class="_slide">
-                <h1>백두산이</h1>
-            </div>
-            <div id="item-2" class="_slide">
-                <h1>마르고 닳도록</h1>
-            </div>
+            <div>Rank: {currentSong.this_week}</div>
         </div>
         <div class="text-right">
             <h1>{progress} Bottom</h1>

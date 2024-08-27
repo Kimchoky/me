@@ -12,6 +12,7 @@
 <div id={id}
     class="absolute transition-[top,left] flex flex-col min-w-52 min-h-56"  
     style="background-color: {songData.color};
+        transform: translate(-50%, -50%);
         width: {dimensionData.width}{dimensionData.widthUnit}; height: {dimensionData.height}{dimensionData.heightUnit}; top: {y}{dimensionData.yUnit}; left: {x}{dimensionData.xUnit};">
 
     {#if songData.imageUrl}
