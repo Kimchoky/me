@@ -43,3 +43,12 @@ export function pickOne(arr = new Array) {
     console.log('index', index, arr[index]);
     return arr[index];
 }
+
+/** Returns parent route of given route string. 
+ * @param { string | null } route
+*/
+export function getParentRoute(route) {
+    const routeParts = (route || '/').split('/').filter(Boolean);
+    routeParts.pop();
+    return '/' + routeParts.join('/');
+}

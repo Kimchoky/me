@@ -19,7 +19,10 @@
 
 </script>
 <div class="h-full flex">
-    <div class="flex justify-around items-center">
+    <div class="grid grid-flow-row-dense justify-around items-center
+            gap-2 md:gap-6 lg:gap-10
+            grid-cols-1 md:grid-cols-2">
+
         {#each list as item}
         <div class="relative hover:scale-110 transition-transform 
             border-black dark:border-white
@@ -28,7 +31,7 @@
 
             
             <a href={currentPath}/{item.id}
-                class="cursor-pointer block min-h-[20vh]">
+                class="cursor-pointer block ">
                 {#if item.image}
                 <img src="{base}{item.image}" alt={item.name} 
                     class="w-full h-full object-cover">
@@ -42,5 +45,6 @@
 
         </div>
         {/each}
+
     </div>
 </div>

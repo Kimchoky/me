@@ -10,12 +10,15 @@ interface SongData {
 }
 
 interface DimensionData {
-    width?: number = 0;
-    height?: number = 0;
-    x?: number = 0;
-    y?: number = 0;
-    widthUnit?: string = '%';
-    heightUnit?: string = '%';
-    xUnit?: string = '%';
-    yUnit?: string = '%';
+    width?: number;
+    height?: number;
+    scale?: number;
+    left?: number;
+    top?: number;
+    bottom?: number;
+    skewY?: number;
+    rotateY?: number;
+    sizeUnit?: string;
+    posUnit?: string;
+    zIndex: number;
 }

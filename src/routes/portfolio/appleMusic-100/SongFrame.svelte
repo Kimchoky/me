@@ -4,16 +4,17 @@
     export let songData;
     export let dimensionData;
 
-    $:x = dimensionData.x;
-    $:y = dimensionData.y;
-
 </script>
 
 <div id={id}
-    class="absolute transition-[top,left] flex flex-col min-w-52 min-h-56"  
+    class="absolute transition-[left, bottom] duration-200 flex flex-col"  
     style="background-color: {songData.color};
-        transform: translate(-50%, -50%);
-        width: {dimensionData.width}{dimensionData.widthUnit}; height: {dimensionData.height}{dimensionData.heightUnit}; top: {y}{dimensionData.yUnit}; left: {x}{dimensionData.xUnit};">
+        z-index: {dimensionData.zIndex};
+        transform: translate(-50%, -50%) skewY({dimensionData.skewY}deg) rotateY({dimensionData.rotateY}deg) scale({dimensionData.scale});
+        bottom: {dimensionData.bottom}{dimensionData.posUnit}; left: {dimensionData.left}{dimensionData.posUnit};
+        width: {dimensionData.width}{dimensionData.sizeUnit}; height: {dimensionData.height}{dimensionData.sizeUnit};">
+
+    <div>Rank: {songData.this_week}</div>
 
     {#if songData.imageUrl}
     <img src={songData.imageUrl} alt={songData.song} />

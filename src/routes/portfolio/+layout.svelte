@@ -1,17 +1,16 @@
 <script>
 	import { base } from '$app/paths';
 	import { page } from '$app/stores';
+	import { getParentRoute } from '$lib/utils.js';
 
-    const id = $page.params['id'];
-    // const currentData = list.find(v => v.id === id);
+	$: parentRoute = getParentRoute($page.route.id);
     
     export let data;
 
 </script>
 
 <div class="top-0">
-	<a href="{base}/portfolio">👈 Go back</a>
-	<!-- <h1>{currentData?.name}</h1> -->
+	<a href="{base}{parentRoute}">👈 Go back</a>
 </div>
 
 <slot />
