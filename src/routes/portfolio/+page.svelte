@@ -18,7 +18,9 @@
     ]
 
 </script>
-<div class="h-full flex">
+
+<div class="space-y-4 py-4 px-4 lg:px-20">
+
     <div class="grid grid-flow-row-dense justify-around items-center
             gap-2 md:gap-6 lg:gap-10
             grid-cols-1 md:grid-cols-2">

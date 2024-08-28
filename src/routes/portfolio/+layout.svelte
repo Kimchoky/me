@@ -9,7 +9,7 @@
 
 </script>
 
-<div class="top-0">
+<div class="top-0 px-4 lg:px-20">
 	<a href="{base}{parentRoute}">👈 Go back</a>
 </div>
 

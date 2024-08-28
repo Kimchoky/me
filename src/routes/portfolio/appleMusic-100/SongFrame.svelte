@@ -7,14 +7,12 @@
 </script>
 
 <div id={id}
-    class="absolute transition-[left, bottom] duration-200 flex flex-col"  
+    class="absolute transition-[left, bottom] duration-200 flex flex-col border border-slate-800" 
     style="background-color: {songData.color};
         z-index: {dimensionData.zIndex};
         transform: translate(-50%, -50%) skewY({dimensionData.skewY}deg) rotateY({dimensionData.rotateY}deg) scale({dimensionData.scale});
-        bottom: {dimensionData.bottom}{dimensionData.posUnit}; left: {dimensionData.left}{dimensionData.posUnit};
+        top: {dimensionData.top}{dimensionData.posUnit}; left: {dimensionData.left}{dimensionData.posUnit};
         width: {dimensionData.width}{dimensionData.sizeUnit}; height: {dimensionData.height}{dimensionData.sizeUnit};">
-
-    <div>Rank: {songData.this_week}</div>
 
     {#if songData.imageUrl}
     <img src={songData.imageUrl} alt={songData.song} />
@@ -23,9 +21,9 @@
         <path fill="currentColor" stroke="currentColor" stroke-width=".2" d="M12 11a1 1 0 0 0-1 1a1 1 0 0 0 1 1a1 1 0 0 0 1-1a1 1 0 0 0-1-1m0 5.5c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5s4.5 2 4.5 4.5s-2 4.5-4.5 4.5M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2" />
     </svg>
     {/if}
-    <div class="p-2">
+    <!-- <div class="p-2">
         <div class="overflow-hidden text-ellipsis whitespace-nowrap">{songData.song}</div>
         <div class="overflow-hidden text-ellipsis whitespace-nowrap">{songData.artist}</div>
-    </div>
+    </div> -->
 
 </div>

@@ -15,10 +15,10 @@ interface DimensionData {
     scale?: number;
     left?: number;
     top?: number;
-    bottom?: number;
     skewY?: number;
     rotateY?: number;
     sizeUnit?: string;
     posUnit?: string;
     zIndex: number;
+    cssClass?: string;
 }

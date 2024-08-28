@@ -5,8 +5,8 @@
 	import SongFrame from "./SongFrame.svelte";
 
     export let data;
-    const SONGS_TOWARD_NUM = 5;
-    const SONGS_BACKWARD_NUM = 5;
+    const SONGS_TOWARD_NUM = 3;
+    const SONGS_BACKWARD_NUM = 3;
 
     /** @type { Array<SongData> }*/
     const wholeList = data.billboardHot100
@@ -15,6 +15,7 @@
     }, songData))
     .sort((a, b) => a.this_week - b.this_week);
 
+    let containerBg = '';
     /** @type { Array<{songData: SongData, dimensionData: DimensionData}> } */
     let visibleList;
     let progress = 0;
@@ -24,13 +25,13 @@
     let currPx = 0, topPx = 0, bottomPx = 0;
 
     const defaultDimensionData = {
-        width: 12,
-        height: 14,
+        width: 16,
+        height: 12,
         scale: 1,
         left: 0,
-        bottom: 0,
-        skewY: 15,
-        rotateY: 60,
+        top: 50,
+        skewY: 12,
+        rotateY: 50,
         sizeUnit: 'rem',
         posUnit: '%',
         zIndex: 20,
@@ -41,7 +42,15 @@
     function doAnimate() {
 
         const index = Math.min(wholeList.length -1, wholeList.length - 1 - Math.floor(progress));
+        if (index < 0) return;
+
         currentSong = wholeList[index];
+
+        if (progress > 0) {
+            containerBg = currentSong.color;
+        }
+        else
+            containerBg = '';
         
         const fromIndex = Math.max(0, index - SONGS_TOWARD_NUM);
         const toIndex = Math.min(wholeList.length - 1, index + SONGS_BACKWARD_NUM);
@@ -49,29 +58,29 @@
         visibleList = wholeList.slice(fromIndex, toIndex + 1).map((songData, i) => {
             // translate(-50%, -50%) skewY(15deg) rotateY(60deg);
 
-            let { left, bottom, width, height, scale, skewY, rotateY, zIndex } = defaultDimensionData;
+            let { left, top, width, height, scale, skewY, rotateY, zIndex } = defaultDimensionData;
             
             zIndex = zIndex + (100 - i);
             scale = 0.7;
 
             if (fromIndex + i < index) {
-                left = width + i * 5;
+                left = -width + i * 5;
+                top = 80 - (i * 1);
             }
             else if (fromIndex + i === index) {
-                scale = 1.2;
+                scale = 1.5;
                 left = 50;
-                bottom= 50;
-                skewY = 0;
-                rotateY = 0;
+                top = 50;
             }
             else if (fromIndex + i > index) {
-                left = (100 - SONGS_BACKWARD_NUM * width) + (i * 5);
+                left = 100 - width + (i * 5);
+                top = 30 - (i * 1);
             }
 
             return {
                 songData,
                 dimensionData: Object.assign({}, defaultDimensionData, {
-                    left, bottom,
+                    left, top,
                     width, height, scale,
                     skewY, rotateY,
                     zIndex,
@@ -109,24 +118,22 @@
 
 <svelte:window on:scroll={handleScroll} />
 
-<div class="">
+<div class="space-y-4 py-4 px-4 lg:px-20">
     <h2>Apple Music 100</h2>
     <p>Scroll animates song charts to flow. Implemented using sticky position.</p>
 </div>
 
-<div id="dv-container" class="relative h-[2000vh] bg-green-800">
+<div id="dv-container" class="relative h-[2000vh] transition-colors" style="background-color: {containerBg}">
     <div id="dv-sticky" class="sticky top-0 flex flex-col justify-between h-[100svh] overflow-hidden">
+
+        <div class="text-center p-12">
+            <p class="goldText text-[5rem]">{currentSong.this_week}</p>
+        </div>
 
         {#each visibleList as item, index (item.songData.this_week)}
             <SongFrame id="song-{index}" bind:songData={item.songData} bind:dimensionData={item.dimensionData} />
         {/each}
 
-        <div class="text-left">
-            <h1 class="inline">progress: {progress}%</h1>
-        </div>
-        <div class="_slide-container text-center ">
-            <div>Rank: {currentSong.this_week}</div>
-        </div>
         <div class="text-right">
             <h1>{progress} Bottom</h1>
         </div>
@@ -139,3 +146,19 @@
 <div class="">
     <p>End of chart.</p>
 </div>
+
+
+<style>
+    .goldText {
+        --gold-one: rgba(211, 159, 90, 1);
+        --gold-two: rgba(149, 107, 53, 1);
+        --gold-three: rgba(172, 125, 69, 1);
+        --shadow-line-thickness: .5px;
+        --shadow-line-thickness-2: 1px;
+        --shadow-line-thickness-3: .0005em;
+        filter: drop-shadow(calc(var(--shadow-line-thickness-2)* -1) var(--shadow-line-thickness-2) 0 var(--gold-two)) drop-shadow(var(--shadow-line-thickness-2) 0 0 var(--gold-three));
+        background: linear-gradient(45deg, #956732, #d69443, #f2b96e, #fcdd84, #f2b96e, #d69443, #956732, #ca9044, #f2b963);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
