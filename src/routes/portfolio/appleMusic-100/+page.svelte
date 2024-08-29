@@ -24,22 +24,20 @@
     let stickyRect;
     let currPx = 0, topPx = 0, bottomPx = 0;
 
+    /** @type { DimensionData } */
     const defaultDimensionData = {
-        width: 16,
-        height: 12,
+        width: '16rem',
+        height: '12rem',
         scale: 1,
-        left: 0,
-        top: 50,
-        skewY: 12,
-        rotateY: 50,
-        sizeUnit: 'rem',
-        posUnit: '%',
+        left: '50%',
+        top: '50%',
+        translate: '-50%, -50%',
+        skewY: '12deg',
+        rotateY: '50deg',
         zIndex: 20,
+        cssStyle: '',
     }
     
-    wholeList[99].color = 'rgb(255,255,255)';
-    wholeList[98].color = 'rgb(0,0,0)';
-
     $: {
         textColorForSong = pickTextColorBasedOnBgColor(containerBg, '#fff', '#000')
     }
@@ -63,25 +61,27 @@
         const toIndex = Math.min(wholeList.length - 1, index + SONGS_BACKWARD_NUM);
 
         visibleList = wholeList.slice(fromIndex, toIndex + 1).map((songData, i) => {
-            // translate(-50%, -50%) skewY(15deg) rotateY(60deg);
-
-            let { left, top, width, height, scale, skewY, rotateY, zIndex } = defaultDimensionData;
+            
+            const iDistance = Math.abs(index - fromIndex - i);
+            let { left, top, width, height, translate, scale, skewY, rotateY, zIndex, cssStyle } = defaultDimensionData;
             
             zIndex = zIndex + (100 - i);
-            scale = 0.7;
+            scale = 1;
 
             if (fromIndex + i < index) {
-                left = -width + i * 5;
-                top = 80 - (i * 1);
+                left = `calc(-${width} / 1.2 - ${iDistance}rem)`;
+                top = `${80 - (i * 1)}%`;
+                translate = `30%, -50%`; 
             }
             else if (fromIndex + i === index) {
-                scale = 1.5;
-                left = 50;
-                top = 50;
+                scale = 1.7;
+                left = '50%';
+                top = '50%';
             }
             else if (fromIndex + i > index) {
-                left = 100 - width + (i * 5);
-                top = 30 - (i * 1);
+                left = `calc(100% - ${width} / 1.2 + ${iDistance}rem)`;
+                top = `${30 - (i * 1)}%`;
+                translate = `40%, -50%`;
             }
 
             return {
@@ -89,8 +89,9 @@
                 dimensionData: Object.assign({}, defaultDimensionData, {
                     left, top,
                     width, height, scale,
-                    skewY, rotateY,
+                    translate, skewY, rotateY,
                     zIndex,
+                    cssStyle
                 })
             };
         });
@@ -110,6 +111,19 @@
 
         doAnimate();
 
+        
+        const newspaperSpinning = [
+            { transform: "rotate(0) scale(1)" },
+            { offset: 0.5, transform: "rotate(360deg) scale(0)" },
+            { transform: ''},
+        ];
+
+        const newspaperTiming = {
+            duration: 2000,
+            iterations: 1,
+        };
+
+        
     }
 
     onMount(()=>{
@@ -131,19 +145,21 @@
 </div>
 
 <div id="dv-container" class="relative h-[2000vh] transition-colors" style="background-color: {containerBg}">
-    <div id="dv-sticky" class="sticky top-0 flex flex-col justify-evenly h-[100svh] overflow-hidden">
+    <div id="dv-sticky" class="sticky top-0 flex flex-col justify-center h-[100svh] overflow-hidden">
 
-        <div class="text-center">
+        <div class="fromtAnim">TEST</div>
+
+        <div class="absolute top-10 left-1/2 -translate-x-1/2">
             <div class="goldText text-[5rem]">{currentSong.this_week}</div>
         </div>
         
-        <div class="h-16">
+        <div class="h-1/2">
         {#each visibleList as item, index (item.songData.this_week)}
             <SongFrame id="song-{index}" bind:songData={item.songData} bind:dimensionData={item.dimensionData} />
         {/each}
         </div>
 
-        <div class="text-center">
+        <div class="absolute bottom-36 left-1/2 -translate-x-1/2 text-center">
             <div style="color: {textColorForSong}">{currentSong.song}</div>
             <div class="contrast-50 opacity-50" style="color: {textColorForSong}">{currentSong.artist}</div>
         </div>

@@ -10,15 +10,14 @@ interface SongData {
 }
 
 interface DimensionData {
-    width?: number;
-    height?: number;
+    width?: string;
+    height?: string;
     scale?: number;
-    left?: number;
-    top?: number;
-    skewY?: number;
-    rotateY?: number;
-    sizeUnit?: string;
-    posUnit?: string;
+    left?: string;
+    top?: string;
+    translate?: string;
+    skewY?: string;
+    rotateY?: string;
     zIndex: number;
     cssClass?: string;
 }

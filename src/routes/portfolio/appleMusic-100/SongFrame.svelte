@@ -10,10 +10,10 @@
     class="absolute transition-[left, bottom] duration-200 flex flex-col border border-slate-800" 
     style="background-color: {songData.color};
         z-index: {dimensionData.zIndex};
-        transform: translate(-50%, -50%) skewY({dimensionData.skewY}deg) rotateY({dimensionData.rotateY}deg) scale({dimensionData.scale});
-        top: {dimensionData.top}{dimensionData.posUnit}; left: {dimensionData.left}{dimensionData.posUnit};
-        width: {dimensionData.width}{dimensionData.sizeUnit}; height: {dimensionData.height}{dimensionData.sizeUnit};">
-
+        transform: translate({dimensionData.translate}) skewY({dimensionData.skewY}) rotateY({dimensionData.rotateY}) scale({dimensionData.scale});
+        top: {dimensionData.top}; left: {dimensionData.left};
+        width: {dimensionData.width}; height: {dimensionData.height};
+        {dimensionData.cssStyle} ">
     {#if songData.imageUrl}
     <img src={songData.imageUrl} alt={songData.song} />
     {:else}
