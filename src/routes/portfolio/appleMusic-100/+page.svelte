@@ -1,7 +1,7 @@
 <script>
     
 	import { onMount } from "svelte";
-	import { iterate, randomInt } from "$lib/utils";
+	import { pickTextColorBasedOnBgColor, randomInt } from "$lib/utils";
 	import SongFrame from "./SongFrame.svelte";
 
     export let data;
@@ -15,7 +15,7 @@
     }, songData))
     .sort((a, b) => a.this_week - b.this_week);
 
-    let containerBg = '';
+    let containerBg = '', textColorForSong = '';
     /** @type { Array<{songData: SongData, dimensionData: DimensionData}> } */
     let visibleList;
     let progress = 0;
@@ -37,6 +37,13 @@
         zIndex: 20,
     }
     
+    wholeList[99].color = 'rgb(255,255,255)';
+    wholeList[98].color = 'rgb(0,0,0)';
+
+    $: {
+        textColorForSong = pickTextColorBasedOnBgColor(containerBg, '#fff', '#000')
+    }
+
     doAnimate();
 
     function doAnimate() {
@@ -47,7 +54,7 @@
         currentSong = wholeList[index];
 
         if (progress > 0) {
-            containerBg = currentSong.color;
+            containerBg = currentSong.color || 'rgb(121,23,41)';
         }
         else
             containerBg = '';
@@ -124,19 +131,23 @@
 </div>
 
 <div id="dv-container" class="relative h-[2000vh] transition-colors" style="background-color: {containerBg}">
-    <div id="dv-sticky" class="sticky top-0 flex flex-col justify-between h-[100svh] overflow-hidden">
+    <div id="dv-sticky" class="sticky top-0 flex flex-col justify-evenly h-[100svh] overflow-hidden">
 
-        <div class="text-center p-12">
-            <p class="goldText text-[5rem]">{currentSong.this_week}</p>
+        <div class="text-center">
+            <div class="goldText text-[5rem]">{currentSong.this_week}</div>
         </div>
-
+        
+        <div class="h-16">
         {#each visibleList as item, index (item.songData.this_week)}
             <SongFrame id="song-{index}" bind:songData={item.songData} bind:dimensionData={item.dimensionData} />
         {/each}
-
-        <div class="text-right">
-            <h1>{progress} Bottom</h1>
         </div>
+
+        <div class="text-center">
+            <div style="color: {textColorForSong}">{currentSong.song}</div>
+            <div class="contrast-50 opacity-50" style="color: {textColorForSong}">{currentSong.artist}</div>
+        </div>
+
     </div>
 </div>
 
@@ -149,6 +160,8 @@
 
 
 <style>
+
+
     .goldText {
         --gold-one: rgba(211, 159, 90, 1);
         --gold-two: rgba(149, 107, 53, 1);
