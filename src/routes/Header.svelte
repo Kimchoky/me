@@ -1,5 +1,4 @@
 <script>
-    import { gLoading } from '$lib/stores/environments';
     import { onMount } from "svelte";
     import themeEnv from '$lib/client/preferedColorScheme';
 
@@ -19,13 +18,11 @@
     /** @type {'dark'|'light'|null}*/
     let theme = siteTheme;
     let isDarkTheme = false;
-    $gLoading = true;
     
     $: {
         if (theme) { 
             themeEnv.toggle(theme);
             isDarkTheme = theme === 'dark';
-            $gLoading = false;
         }
 
         if (browser && showMenu) {
